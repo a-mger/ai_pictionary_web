@@ -9,7 +9,9 @@ import sys
 import base64
 from tensorflow.keras.backend import expand_dims
 from tensorflow.keras.models import load_model
+
 np.set_printoptions(threshold=sys.maxsize)
+
 model = load_model('model.save')
 
 # Specify canvas parameters in application
@@ -36,8 +38,8 @@ canvas_result = st_canvas(
 )
 # Do something interesting with the image data and paths
 #if canvas_result.json_data is not None:
-    #st.dataframe(pd.json_normalize(canvas_result.json_data["objects"]))
-    #df = pd.json_normalize(canvas_result.json_data["objects"])["path"]
+#st.dataframe(pd.json_normalize(canvas_result.json_data["objects"]))
+#df = pd.json_normalize(canvas_result.json_data["objects"])["path"]
 if canvas_result.image_data is not None:
     #st.image(canvas_result.image_data)
     img = Image.fromarray(canvas_result.image_data.astype(np.uint8))
@@ -53,5 +55,3 @@ if canvas_result.image_data is not None:
     labels = np.load('data_labels.npy')
     labels[maxValueIndex[0]]
     st.write(labels)
-
-    
