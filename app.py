@@ -10,7 +10,7 @@ import base64
 from tensorflow.keras.backend import expand_dims
 from tensorflow.keras.models import load_model
 np.set_printoptions(threshold=sys.maxsize)
-
+model = load_model('model.save')
 
 # Specify canvas parameters in application
 # stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
@@ -47,15 +47,11 @@ if canvas_result.image_data is not None:
     img_gray = np.invert(img_gray)
     img_gray = img_gray.reshape((1, 28, 28,1))
     #img_gray.shape
-    model = load_model('model.save')
     y_pred = model.predict(img_gray)
     y_pred = pd.DataFrame(y_pred)
     maxValueIndex = y_pred.idxmax(axis=1)
-    pred = [
-        'alarmclock', 'bicycle', 'boomerang', 'bread', 'broccoli', 'banana',
-        'baseball', 'basketball', 'birthday cake', 'bracelet', 'cookie', 'hat',
-        'lollipop', 'moon', 'pizza', 'spoon', 'sun', 'umbrella', 'wheel',
-        'lantern', 'lightning', 'streetlight', 'tennis racquet', 'tractor'
-    ]
+    labels = np.load('data_labels.npy')
+    labels[maxValueIndex[0]]
+    st.write(labels)
 
-    pred[maxValueIndex[0]]
+    
