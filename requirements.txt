@@ -17,6 +17,6 @@ google-cloud-storage
 uvicorn
 fastapi
 streamlit
-PIL
+Pillow
 seaborn
 matplotlib.pyplot
