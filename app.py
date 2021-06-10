@@ -41,12 +41,19 @@ if canvas_result.image_data is not None:
     img_28_28 = np.asarray(img_28_28)
     img_gray = 255 - img_28_28[:, :, 3]
     img_gray = np.invert(img_gray)
+    
+    #optimizing images 
+    img_gray[img_gray < 50] = 0
+    img_gray[(img_gray > 51) & (img_gray < 100)] = 75
+    img_gray[(img_gray > 101) & (img_gray < 149)] = 149
+    img_gray[img_gray > 150] = 255
+    
     img_list = img_gray.tolist()
     img_json = json.dumps(img_list)
 
     # enter here the address of your flask api
-    #url = 'https://aipictionaryimage-djqbxeaiha-ew.a.run.app/predict'
-    url = 'http://127.0.0.1:8000/predict'
+    url = 'https://aipictionaryimage-djqbxeaiha-ew.a.run.app/predict'
+    #url = 'http://127.0.0.1:8000/predict'
     params = dict(img_frontend=img_json)
     response = requests.get(url, params=params)
     prediction = response.json()
