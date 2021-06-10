@@ -7,22 +7,16 @@ wheel>=0.29
 # data science
 numpy
 pandas
-scikit-learn
-
-# tests/linter
-black
-coverage
-flake8
-pytest
-yapf
+streamlit
 
 # API
 gcsfs
 google-cloud-storage
-s3fs
 
 # utilities
-six>=1.14
-termcolor
 uvicorn
 fastapi
+streamlit
+PIL
+seaborn
+matplotlib.pyplot
