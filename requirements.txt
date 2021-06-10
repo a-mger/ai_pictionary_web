@@ -20,3 +20,4 @@ streamlit
 Pillow
 seaborn
 matplotlib
+streamlit-drawable-canvas
