@@ -95,34 +95,76 @@ with col3:
             #st_echarts(type=pie, )
 
             options = {
-                "tooltip": {"trigger": "item"},
-                "legend": {"top": "5%", "left": "center"},
-                "series": [
-                    {
-                        "name": "Probability",
-                        "type": "pie",
-                        "radius": ["40%", "70%"],
-                        "avoidLabelOverlap": False,
-                        "itemStyle": {
-                            "borderRadius": 10,
-                            "borderColor": "#fff",
-                            "borderWidth": 2,
+                "tooltip": {
+                    "trigger": "item"
+                },
+                "legend": {
+                    "top": "5%",
+                    "left": "center"
+                },
+                "series": [{
+                    "name":
+                    "Probability",
+                    "type":
+                    "pie",
+                    "radius": ["40%", "70%"],
+                    "avoidLabelOverlap":
+                    False,
+                    "itemStyle": {
+                        "borderRadius": 10,
+                        "borderColor": "#fff",
+                        "borderWidth": 2,
+                    },
+                    "label": {
+                        "show": False,
+                        "position": "center"
+                    },
+                    "emphasis": {
+                        "label": {
+                            "show": True,
+                            "fontSize": "40",
+                            "fontWeight": "bold"
+                        }
+                    },
+                    "labelLine": {
+                        "show": False
+                    },
+                    "data": [
+                        {
+                            "value":
+                            round(df.values[0][0] * 100),
+                            "name":
+                            f"{df.columns[0]} {round(df.values[0][0] * 100)}%"
                         },
-                        "label": {"show": False, "position": "center"},
-                        "emphasis": {
-                            "label": {"show": True, "fontSize": "40", "fontWeight": "bold"}
+                        {
+                            "value":
+                            round(df.values[0][1] * 100),
+                            "name":
+                            f"{df.columns[1]} {round(df.values[0][1] * 100)}%"
                         },
-                        "labelLine": {"show": False},
-                        "data": [
-                            {"value": round(df.values[0][0] * 100), "name": df.columns[0]},
-                            {"value": round(df.values[0][1] * 100), "name": df.columns[1]},
-                            {"value": round(df.values[0][2] * 100), "name": df.columns[2]},
-                            {"value": round(df.values[0][3] * 100), "name": df.columns[3]},
-                            {"value": round(df.values[0][4] * 100), "name": df.columns[4]},
-                        ],
-                    }
-                ],
+                        {
+                            "value":
+                            round(df.values[0][2] * 100),
+                            "name":
+                            f"{df.columns[2]} {round(df.values[0][2] * 100)}%"
+                        },
+                        {
+                            "value":
+                            round(df.values[0][3] * 100),
+                            "name":
+                            f"{df.columns[3]} {round(df.values[0][3] * 100)}%"
+                        },
+                        {
+                            "value":
+                            round(df.values[0][4] * 100),
+                            "name":
+                            f"{df.columns[4]} {round(df.values[0][4] * 100)}%"
+                        },
+                    ],
+                }],
             }
             st_echarts(options=options, height="500px")
-        else: 
+        else:
             st.image("cartoon.jpeg")
+    else:
+        st.image("cartoon.jpeg")
