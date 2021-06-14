@@ -4,6 +4,9 @@ import streamlit as st
 from streamlit.caching import cache
 from streamlit.elements import button
 from streamlit_drawable_canvas import st_canvas
+from pyecharts import options as opts
+from pyecharts.charts import Bar
+from streamlit_echarts import st_echarts
 import numpy as np
 import json
 import requests
@@ -34,7 +37,7 @@ with col1:
             st.write(labels[i])
                 
 col2.header('Start drawing')
-col3.header('Outcome')
+col3.header('Most likely drawing')
 
 # Specify canvas parameters in application
 # stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
@@ -90,5 +93,37 @@ with col3:
         prediction = response.json()
         df = pd.read_json(prediction)
         fig, ax = plt.subplots()
-        ax = sns.barplot(y=df.values[0], x=df.columns)
-        st.pyplot(fig)
+        #ax = sns.barplot(y=df.values[0], x=df.columns)
+        #st.pyplot(fig)
+        #st_echarts(type=pie, )
+        
+        options = {
+            "tooltip": {"trigger": "item"},
+            "legend": {"top": "5%", "left": "center"},
+            "series": [
+                {
+                    "name": "Probability",
+                    "type": "pie",
+                    "radius": ["40%", "70%"],
+                    "avoidLabelOverlap": False,
+                    "itemStyle": {
+                        "borderRadius": 10,
+                        "borderColor": "#fff",
+                        "borderWidth": 2,
+                    },
+                    "label": {"show": False, "position": "center"},
+                    "emphasis": {
+                        "label": {"show": True, "fontSize": "40", "fontWeight": "bold"}
+                    },
+                    "labelLine": {"show": False},
+                    "data": [
+                        {"value": df.values[0][0], "name": df.columns[0]},
+                        {"value": df.values[0][1], "name": df.columns[1]},
+                        {"value": df.values[0][2], "name": df.columns[2]},
+                        {"value": df.values[0][3], "name": df.columns[3]},
+                        {"value": df.values[0][4], "name": df.columns[4]},
+                    ],
+                }
+            ],
+        }
+        st_echarts(options=options, height="500px")
