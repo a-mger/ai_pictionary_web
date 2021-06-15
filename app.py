@@ -1,14 +1,11 @@
 import pandas as pd
 from PIL import Image
 import streamlit as st
-from streamlit.caching import cache
-from streamlit.elements import button
 from streamlit_drawable_canvas import st_canvas
 from streamlit_echarts import st_echarts
 import numpy as np
 import json
 import requests
-import seaborn as sns
 import matplotlib.pyplot as plt
 import random
 st. set_page_config(layout="wide")
