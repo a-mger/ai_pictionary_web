@@ -8,16 +8,21 @@ import json
 import requests
 import matplotlib.pyplot as plt
 import random
-st. set_page_config(layout="wide")
+from quickdraw import QuickDrawData
 
+
+st.set_page_config(layout="wide")
+labels_250 = np.load(f'CNN_250_labels.npy')
+labels_250 = labels_250.tolist()
 col1, col2, col3 = st.beta_columns((2,3,3))
+
 
 col1.header('Wanna play a game?')
 with col1:
     choose_model = st.selectbox(
     'Choose a model',
     ('CNN_50', 'CNN_150', 'CNN_250'))
-    if st.button('Press me!'):
+    if st.button('Show 5 random labels!'):
         labels = np.load(f'{choose_model}_labels.npy')
         fivelabels = random.sample(range(0, len(labels)), 5)
         for i in fivelabels:
@@ -92,9 +97,7 @@ with col3:
             #st_echarts(type=pie, )
 
             options = {
-                "tooltip": {
-                    "trigger": "item"
-                },
+
                 "legend": {
                     "top": "5%",
                     "left": "center"
@@ -165,3 +168,26 @@ with col3:
             st.image("cartoon.jpeg")
     else:
         st.image("cartoon.jpeg")
+st.write("#")
+st.write("#")
+st.write("#")
+col11, col21, col31 = st.beta_columns((2, 3, 3))
+
+with col11:
+
+    pic_request = st.text_input('Paste a Label and show how other peaople drew it')
+    if st.button('Provide Picture'):
+        if pic_request in labels_250:
+            qd = QuickDrawData()
+            st.image(qd.get_drawing(pic_request).image)
+        elif pic_request == '':
+            st.write('#')
+        else:
+            st.write('Not a valid label')
+
+with col31:
+    #st.components.v1.iframe("https://www.pexels.com/nl-nl/zoeken/cat/")
+    st.write("Maroussia")
+    st.write("Hidde")
+    st.write("Andreas")
+    st.image("lewagon.png")
