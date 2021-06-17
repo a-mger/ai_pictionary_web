@@ -193,7 +193,7 @@ col11, col21, col31 = st.beta_columns((2, 3, 3))
 
 with col11:
 
-    pic_request = st.text_input('Paste a Label and show how other peaople drew it')
+    pic_request = st.text_input('Paste a Label and show how other people drew it')
     if st.button('Provide Picture'):
         if pic_request in labels_250:
             qd = QuickDrawData()
