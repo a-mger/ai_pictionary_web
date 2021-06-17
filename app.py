@@ -10,17 +10,35 @@ import matplotlib.pyplot as plt
 import random
 from quickdraw import QuickDrawData
 
-
 st.set_page_config(layout="wide")
+st.sidebar.header('A.I. Pictionary')
+st.sidebar.image("lewagon.png")
+st.sidebar.write("Amsterdam - Batch 627")
+st.sidebar.write("#")
+
+st.sidebar.write(
+    "[Maroussia Loots](https://www.linkedin.com/in/maroussia-loots)")
+
+st.sidebar.write(
+    "[Andreas Mussger](https://www.linkedin.com/in/andreasmussger/)")
+
+st.sidebar.write(
+    "[Hidde Uittenbosch](https://www.linkedin.com/in/hidde-uittenbosch/)")
+
+st.sidebar.write("#")
+st.sidebar.write("[GitHub repository](https://github.com/a-mger/ai_pictionary)")
+
+
+
 labels_250 = np.load(f'CNN_250_labels.npy')
 labels_250 = labels_250.tolist()
 col1, col2, col3 = st.beta_columns((2,3,3))
 
 
-col1.header('Wanna play a game?')
+col1.header('Choose a model')
 with col1:
     choose_model = st.selectbox(
-    'Choose a model',
+    '50 Labels / 150 Labels / 250 Labels',
     ('CNN_50', 'CNN_150', 'CNN_250'))
     if st.button('Show 5 random labels!'):
         labels = np.load(f'{choose_model}_labels.npy')
@@ -184,10 +202,3 @@ with col11:
             st.write('#')
         else:
             st.write('Not a valid label')
-
-with col31:
-    #st.components.v1.iframe("https://www.pexels.com/nl-nl/zoeken/cat/")
-    st.write("Maroussia")
-    st.write("Hidde")
-    st.write("Andreas")
-    st.image("lewagon.png")
