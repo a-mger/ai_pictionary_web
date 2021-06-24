@@ -49,24 +49,11 @@ with col1:
 col2.header('Draw Something')
 col3.header('A.I. Prediction')
 
-# Specify canvas parameters in application
-# stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
-# stroke_color = st.sidebar.color_picker("Stroke color hex: ")
-# bg_color = st.sidebar.color_picker("Background color hex: ", "#eee")
-# bg_image = st.sidebar.file_uploader("Background image:", type=["png", "jpg"])
-# drawing_mode = st.sidebar.selectbox(
-#     "Drawing tool:", ("freedraw", "line", "rect", "circle", "transform"))
-# realtime_update = st.sidebar.checkbox("Update in realtime", True)
-#
-# Create a canvas component
 with col2:
     realtimeupdate = st.checkbox('Update in real time', False)
     canvas_result = st_canvas(
-        #fill_color="rgba(255, 165, 0, 0.3)",  # Fixed fill color with some opacity
         stroke_width=8.2,
         stroke_color="rgba(0, 0, 0,1)",
-        #background_color="" if bg_image else bg_color,
-        #background_image=Image.open(bg_image) if bg_image else None,
         update_streamlit=realtimeupdate,
         height=280,
         width=280,
@@ -74,10 +61,6 @@ with col2:
         key="canvas",
     )
 
-# Do something interesting with the image data and paths
-#if canvas_result.json_data is not None:
-#st.dataframe(pd.json_normalize(canvas_result.json_data["objects"]))
-#df = pd.json_normalize(canvas_result.json_data["objects"])["path"]
 with col3:
 
 
@@ -90,10 +73,6 @@ with col3:
         nocanvas = (img_gray.sum() == 0)
 
         if nocanvas != True:
-            #st.image(canvas_result.image_data)
-            #print(img_gray)
-            #print('----'*100)
-            #optimizing images
             img_gray[img_gray < 50] = 0
             img_gray[(img_gray > 51) & (img_gray < 100)] = 75
             img_gray[(img_gray > 101) & (img_gray < 149)] = 149
@@ -110,9 +89,6 @@ with col3:
             prediction = response.json()
             df = pd.read_json(prediction)
             fig, ax = plt.subplots()
-            #ax = sns.barplot(y=df.values[0], x=df.columns)
-            #st.pyplot(fig)
-            #st_echarts(type=pie, )
 
             options = {
 
